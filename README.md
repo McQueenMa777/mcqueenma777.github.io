@@ -10,12 +10,16 @@
 
 ## 代码
 
+## 图片
+
+![示例图片](https://www.example.com/image.jpg)
+
+## 视频
+
+[![视频预览图](./video_thumbnail.jpg)](./videos/actual_video.mp4)
+
 你可以在文本中插入代码，例如：
 
 ```python
 print("Hello, World!")
-
-## 图片
-
-![示例图片](https://www.example.com/image.jpg)
 
