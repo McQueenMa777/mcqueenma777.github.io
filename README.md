@@ -14,3 +14,8 @@
 
 ```python
 print("Hello, World!")
+
+## 图片
+
+![示例图片](https://www.example.com/image.jpg)
+
