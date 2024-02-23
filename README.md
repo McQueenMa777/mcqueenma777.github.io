@@ -1,3 +1,4 @@
+theme: jekyll-theme-architect
 # 标题
 
 这是一段正文，可以包含 *斜体*、**粗体**、[链接](https://www.example.com)，以及其他格式。
