@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated background elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -7s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 60%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #64ffda, #448aff, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn:hover {
+            border-color: #64ffda;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #64ffda, #448aff);
+            border-color: transparent;
+            transform: scale(1.05);
+        }
+
+        /* Main content areas */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #64ffda;
+        }
+
+        .project-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(100, 255, 218, 0.2);
+            color: #64ffda;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+
+        /* Project detail page */
+        .project-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .project-detail h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #64ffda;
+        }
+
+        .project-detail .meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0.7;
+        }
+
+        .project-detail .content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .project-detail .features {
+            margin: 2rem 0;
+        }
+
+        .project-detail .features h3 {
+            color: #448aff;
+            margin-bottom: 1rem;
+        }
+
+        .project-detail .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-detail .features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .project-detail .features li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #64ffda, #448aff);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+        }
+
+        /* About section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .about-content h2 {
+            color: #64ffda;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Game Developer</h1>
+                <p class="subtitle">Crafting Interactive Experiences</p>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showSection('home')">Home</button>
+                <button class="nav-btn" onclick="showSection('about')">About</button>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="projects-grid">
+                    <div class="project-card" onclick="showProject('project1')">
+                        <div class="project-image">🎮</div>
+                        <h3 class="project-title">Quantum Runner</h3>
+                        <p class="project-description">A fast-paced platformer where players manipulate quantum mechanics to solve puzzles and navigate through parallel dimensions.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Platformer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('project2')">
+                        <div class="project-image">🌟</div>
+                        <h3 class="project-title">Stellar Forge</h3>
+                        <p class="project-description">A space exploration and crafting game where players build and customize their own starships while discovering alien civilizations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">Blueprint</span>
+                            <span class="tag">Space Sim</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('project3')">
+                        <div class="project-image">🗡️</div>
+                        <h3 class="project-title">Mystic Realms</h3>
+                        <p class="project-description">An action RPG featuring dynamic spell-crafting system and procedurally generated dungeons with mythological creatures.</p>
+                        <div class="project-tags">
+                            <span class="tag">Godot</span>
+                            <span class="tag">GDScript</span>
+                            <span class="tag">RPG</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('project4')">
+                        <div class="project-image">🧩</div>
+                        <h3 class="project-title">Mind Maze</h3>
+                        <p class="project-description">A psychological puzzle game that adapts to player behavior, featuring impossible geometries and reality-bending mechanics.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Puzzle</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <p>I'm a passionate game developer with a love for creating immersive and innovative gaming experiences. My journey in game development spans across multiple engines and platforms, always pushing the boundaries of what's possible in interactive entertainment.</p>
+                    
+                    <p>With expertise in Unity, Unreal Engine, and Godot, I specialize in creating games that challenge conventional mechanics and offer players unique experiences. From quantum physics puzzles to space exploration adventures, each project represents my commitment to combining technical excellence with creative storytelling.</p>
+                    
+                    <p>When I'm not coding, you can find me exploring new game mechanics, studying player psychology, or experimenting with emerging technologies like VR and procedural generation.</p>
+                </div>
+            </section>
+
+            <!-- Project Detail Sections -->
+            <section id="project1" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Quantum Runner</h2>
+                    <div class="meta">
+                        <span>Platform: PC, Mobile</span>
+                        <span>Engine: Unity 2022.3</span>
+                        <span>Development Time: 8 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Quantum Runner revolutionizes the platformer genre by incorporating real quantum mechanics concepts into gameplay. Players can exist in multiple states simultaneously, tunnel through barriers, and manipulate probability to overcome seemingly impossible challenges.</p>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Quantum superposition mechanics allowing players to be in multiple locations</li>
+                                <li>Probability manipulation puzzles with visual uncertainty principles</li>
+                                <li>Parallel dimension switching with unique physics in each realm</li>
+                                <li>Adaptive difficulty based on quantum uncertainty</li>
+                                <li>Educational mode explaining real quantum physics concepts</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The game features a unique visual style that represents quantum states through particle effects and shifting geometries. The soundtrack dynamically changes based on the player's quantum state, creating an audio-visual experience that's both educational and entertaining.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project2" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Stellar Forge</h2>
+                    <div class="meta">
+                        <span>Platform: PC, Console</span>
+                        <span>Engine: Unreal Engine 5</span>
+                        <span>Development Time: 14 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Stellar Forge combines space exploration with deep crafting mechanics, allowing players to design and build their own starships from scratch. Every component affects ship performance, from engine efficiency to defensive capabilities.</p>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Modular ship building system with realistic physics simulation</li>
+                                <li>Procedurally generated galaxy with unique alien civilizations</li>
+                                <li>Dynamic economy based on interstellar trade and diplomacy</li>
+                                <li>Real-time space battles with tactical combat systems</li>
+                                <li>Cooperative multiplayer for fleet operations</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The game features stunning visuals powered by Unreal Engine 5's Nanite and Lumen technologies. Each star system is procedurally generated with unique astronomical phenomena, creating endless exploration possibilities while maintaining scientific accuracy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project3" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Mystic Realms</h2>
+                    <div class="meta">
+                        <span>Platform: PC, Steam Deck</span>
+                        <span>Engine: Godot 4.1</span>
+                        <span>Development Time: 11 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Mystic Realms is an action RPG that draws inspiration from various mythologies around the world. The game features a unique spell-crafting system where players combine elemental runes to create custom magical abilities.</p>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Dynamic spell-crafting with over 200 possible combinations</li>
+                                <li>Procedurally generated dungeons inspired by world mythologies</li>
+                                <li>Creature AI that learns and adapts to player strategies</li>
+                                <li>Rich narrative with branching storylines and multiple endings</li>
+                                <li>Hand-painted art style with fluid 2D animation</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The game's art style combines traditional hand-painted textures with modern lighting techniques. Each mythological realm features distinctive visual themes and creatures based on extensive cultural research, creating an authentic yet fantastical experience.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project4" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Mind Maze</h2>
+                    <div class="meta">
+                        <span>Platform: PC, VR</span>
+                        <span>Engine: Unity 2023.1</span>
+                        <span>Development Time: 6 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Mind Maze is a psychological puzzle game that challenges players' perception of reality. Using impossible geometries and non-Euclidean spaces, the game creates mind-bending experiences that adapt to individual problem-solving patterns.</p>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Non-Euclidean geometry with seamless spatial transitions</li>
+                                <li>AI-driven puzzle generation based on player behavior analysis</li>
+                                <li>Reality-bending mechanics that challenge spatial reasoning</li>
+                                <li>Minimalist aesthetic focusing on geometric forms and lighting</li>
+                                <li>Optional VR mode for enhanced immersion</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The game employs advanced shader techniques to create impossible spaces that challenge the player's understanding of 3D environments. The adaptive AI ensures that each playthrough offers a unique psychological journey tailored to the individual player's cognitive patterns.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Only highlight nav buttons for main sections (home, about)
+            if (sectionId === 'home' || sectionId === 'about') {
+                event.target.classList.add('active');
+            }
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showProject(projectId) {
+            showSection(projectId);
+        }
+
+        // Add some interactive effects
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.floating-shape');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const x = mouseX * speed;
+                const y = mouseY * speed;
+                shape.style.transform += ` translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header-content');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            header.style.transform = `translateY(${rate}px)`;
+        });
+    </script>
+</body>
+</html>
