@@ -279,6 +279,88 @@
             font-size: 1.1rem;
         }
 
+        /* Video section styling */
+        .video-section {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .video-section h3 {
+            color: #448aff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 3rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .play-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .video-placeholder .video-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .actual-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .video-container.has-video .video-placeholder {
+            display: none;
+        }
+
+        .video-container.has-video .actual-video {
+            display: block;
+        }
+
         .project-detail .features {
             margin: 2rem 0;
         }
@@ -433,6 +515,28 @@
                             <span class="tag">Puzzle</span>
                         </div>
                     </div>
+
+                    <div class="project-card" onclick="showProject('project5')">
+                        <div class="project-image">🌊</div>
+                        <h3 class="project-title">Ocean's Echo</h3>
+                        <p class="project-description">An underwater survival adventure where players navigate mysterious deep-sea environments using echolocation and bioluminescent creatures.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">C++</span>
+                            <span class="tag">Survival</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card" onclick="showProject('project6')">
+                        <div class="project-image">⚡</div>
+                        <h3 class="project-title">Neon Velocity</h3>
+                        <p class="project-description">A high-speed cyberpunk racing game featuring customizable hover vehicles and dynamic track generation in neon-soaked cityscapes.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Racing</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -460,6 +564,21 @@
                     </div>
                     <div class="content">
                         <p>Quantum Runner revolutionizes the platformer genre by incorporating real quantum mechanics concepts into gameplay. Players can exist in multiple states simultaneously, tunnel through barriers, and manipulate probability to overcome seemingly impossible challenges.</p>
+                        
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'quantum-runner-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="quantum-runner-demo.mp4" type="video/mp4">
+                                    <source src="quantum-runner-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
                         
                         <div class="features">
                             <h3>Key Features</h3>
@@ -489,6 +608,21 @@
                     <div class="content">
                         <p>Stellar Forge combines space exploration with deep crafting mechanics, allowing players to design and build their own starships from scratch. Every component affects ship performance, from engine efficiency to defensive capabilities.</p>
                         
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'stellar-forge-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="stellar-forge-demo.mp4" type="video/mp4">
+                                    <source src="stellar-forge-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
                         <div class="features">
                             <h3>Key Features</h3>
                             <ul>
@@ -516,6 +650,21 @@
                     </div>
                     <div class="content">
                         <p>Mystic Realms is an action RPG that draws inspiration from various mythologies around the world. The game features a unique spell-crafting system where players combine elemental runes to create custom magical abilities.</p>
+                        
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'mystic-realms-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="mystic-realms-demo.mp4" type="video/mp4">
+                                    <source src="mystic-realms-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
                         
                         <div class="features">
                             <h3>Key Features</h3>
@@ -545,6 +694,21 @@
                     <div class="content">
                         <p>Mind Maze is a psychological puzzle game that challenges players' perception of reality. Using impossible geometries and non-Euclidean spaces, the game creates mind-bending experiences that adapt to individual problem-solving patterns.</p>
                         
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'mind-maze-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="mind-maze-demo.mp4" type="video/mp4">
+                                    <source src="mind-maze-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
                         <div class="features">
                             <h3>Key Features</h3>
                             <ul>
@@ -557,6 +721,92 @@
                         </div>
                         
                         <p>The game employs advanced shader techniques to create impossible spaces that challenge the player's understanding of 3D environments. The adaptive AI ensures that each playthrough offers a unique psychological journey tailored to the individual player's cognitive patterns.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project5" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Ocean's Echo</h2>
+                    <div class="meta">
+                        <span>Platform: PC, PlayStation 5</span>
+                        <span>Engine: Unreal Engine 5</span>
+                        <span>Development Time: 16 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Ocean's Echo takes players into the mysterious depths of an alien ocean world. Using innovative echolocation mechanics and bioluminescent creature interactions, players must survive and explore environments where traditional vision fails.</p>
+                        
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'oceans-echo-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="oceans-echo-demo.mp4" type="video/mp4">
+                                    <source src="oceans-echo-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Revolutionary echolocation system with 3D spatial audio</li>
+                                <li>Symbiotic relationships with bioluminescent deep-sea creatures</li>
+                                <li>Dynamic pressure and current simulation affecting movement</li>
+                                <li>Procedural underwater cave systems and thermal vents</li>
+                                <li>Realistic marine biology with scientifically accurate ecosystems</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The game features cutting-edge underwater rendering with volumetric lighting and particle systems that create an authentic deep-sea atmosphere. Advanced audio design uses binaural recording techniques to create an immersive echolocation experience that guides gameplay without traditional visual cues.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project6" class="content-section">
+                <div class="project-detail">
+                    <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
+                    <h2>Neon Velocity</h2>
+                    <div class="meta">
+                        <span>Platform: PC, Xbox Series X/S</span>
+                        <span>Engine: Unity 2022.3</span>
+                        <span>Development Time: 12 months</span>
+                    </div>
+                    <div class="content">
+                        <p>Neon Velocity combines high-octane racing with cyberpunk aesthetics in a futuristic cityscape. Players pilot customizable hover vehicles through dynamically generated tracks that adapt to their racing style and skill level.</p>
+                        
+                        <div class="video-section">
+                            <h3>Gameplay Walkthrough</h3>
+                            <div class="video-container" onclick="loadVideo(this, 'neon-velocity-demo.mp4')">
+                                <div class="video-placeholder">
+                                    <div class="play-icon">▶</div>
+                                    <div class="video-text">Click to watch gameplay demo</div>
+                                </div>
+                                <video class="actual-video" controls>
+                                    <source src="neon-velocity-demo.mp4" type="video/mp4">
+                                    <source src="neon-velocity-demo.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
+                        <div class="features">
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li>Anti-gravity hover vehicle physics with magnetic track interaction</li>
+                                <li>Real-time track generation based on player performance metrics</li>
+                                <li>Extensive vehicle customization with performance trade-offs</li>
+                                <li>Synthwave-inspired dynamic soundtrack that responds to speed</li>
+                                <li>Competitive multiplayer with skill-based matchmaking</li>
+                            </ul>
+                        </div>
+                        
+                        <p>The visual design draws heavily from 1980s cyberpunk aesthetics, featuring neon-lit cityscapes with holographic advertisements and rain-slicked streets. The game's adaptive AI ensures that tracks become more challenging as players improve, creating a perfect balance between accessibility and competitive depth.</p>
                     </div>
                 </div>
             </section>
@@ -614,6 +864,18 @@
             const rate = scrolled * -0.5;
             header.style.transform = `translateY(${rate}px)`;
         });
+
+        // Video loading function
+        function loadVideo(container, videoSrc) {
+            // You can replace this with actual video loading logic
+            // For now, it just shows the video controls
+            container.classList.add('has-video');
+            
+            // Optional: You can add actual video loading here
+            // const video = container.querySelector('.actual-video');
+            // video.src = videoSrc;
+            // video.load();
+        }
     </script>
 </body>
 </html>
