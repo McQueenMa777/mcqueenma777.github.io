@@ -221,6 +221,28 @@
             justify-content: center;
             font-size: 3rem;
             color: rgba(255, 255, 255, 0.7);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .project-image .emoji {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .project-title {
@@ -423,6 +445,67 @@
             margin-bottom: 1.5rem;
         }
 
+        .profile-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #64ffda, #448aff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 3px solid rgba(100, 255, 218, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .profile-image .emoji {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-text {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             h1 {
@@ -518,11 +601,11 @@
 
                     <div class="project-card" onclick="showProject('project5')">
                         <div class="project-image">🌊</div>
-                        <h3 class="project-title">Ocean's Echo</h3>
-                        <p class="project-description">An underwater survival adventure where players navigate mysterious deep-sea environments using echolocation and bioluminescent creatures.</p>
+                        <h3 class="project-title">Oceanic Depths</h3>
+                        <p class="project-description">An underwater survival adventure where players explore the mysterious deep sea, managing oxygen while uncovering ancient civilizations.</p>
                         <div class="project-tags">
-                            <span class="tag">Unreal Engine</span>
-                            <span class="tag">C++</span>
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
                             <span class="tag">Survival</span>
                         </div>
                     </div>
@@ -530,10 +613,10 @@
                     <div class="project-card" onclick="showProject('project6')">
                         <div class="project-image">⚡</div>
                         <h3 class="project-title">Neon Velocity</h3>
-                        <p class="project-description">A high-speed cyberpunk racing game featuring customizable hover vehicles and dynamic track generation in neon-soaked cityscapes.</p>
+                        <p class="project-description">A high-speed cyberpunk racing game with wall-running mechanics and customizable hover vehicles in a dystopian megacity.</p>
                         <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">C#</span>
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">Blueprint</span>
                             <span class="tag">Racing</span>
                         </div>
                     </div>
@@ -728,25 +811,25 @@
             <section id="project5" class="content-section">
                 <div class="project-detail">
                     <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
-                    <h2>Ocean's Echo</h2>
+                    <h2>Oceanic Depths</h2>
                     <div class="meta">
-                        <span>Platform: PC, PlayStation 5</span>
-                        <span>Engine: Unreal Engine 5</span>
-                        <span>Development Time: 16 months</span>
+                        <span>Platform: PC, PlayStation, Xbox</span>
+                        <span>Engine: Unity 2022.3</span>
+                        <span>Development Time: 12 months</span>
                     </div>
                     <div class="content">
-                        <p>Ocean's Echo takes players into the mysterious depths of an alien ocean world. Using innovative echolocation mechanics and bioluminescent creature interactions, players must survive and explore environments where traditional vision fails.</p>
+                        <p>Oceanic Depths immerses players in the mysterious world beneath the waves, where survival depends on managing limited oxygen while exploring vast underwater caverns and discovering remnants of lost civilizations.</p>
                         
                         <div class="video-section">
                             <h3>Gameplay Walkthrough</h3>
-                            <div class="video-container" onclick="loadVideo(this, 'oceans-echo-demo.mp4')">
+                            <div class="video-container" onclick="loadVideo(this, 'oceanic-depths-demo.mp4')">
                                 <div class="video-placeholder">
                                     <div class="play-icon">▶</div>
                                     <div class="video-text">Click to watch gameplay demo</div>
                                 </div>
                                 <video class="actual-video" controls>
-                                    <source src="oceans-echo-demo.mp4" type="video/mp4">
-                                    <source src="oceans-echo-demo.webm" type="video/webm">
+                                    <source src="oceanic-depths-demo.mp4" type="video/mp4">
+                                    <source src="oceanic-depths-demo.webm" type="video/webm">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -755,15 +838,16 @@
                         <div class="features">
                             <h3>Key Features</h3>
                             <ul>
-                                <li>Revolutionary echolocation system with 3D spatial audio</li>
-                                <li>Symbiotic relationships with bioluminescent deep-sea creatures</li>
-                                <li>Dynamic pressure and current simulation affecting movement</li>
-                                <li>Procedural underwater cave systems and thermal vents</li>
-                                <li>Realistic marine biology with scientifically accurate ecosystems</li>
+                                <li>Realistic underwater physics with pressure and buoyancy simulation</li>
+                                <li>Dynamic oxygen management system with multiple air sources</li>
+                                <li>Bioluminescent creatures that react to player presence</li>
+                                <li>Archaeological puzzle-solving to unlock ancient mysteries</li>
+                                <li>Seamless day/night cycle affecting underwater visibility</li>
+                                <li>Submarine crafting and upgrade system</li>
                             </ul>
                         </div>
                         
-                        <p>The game features cutting-edge underwater rendering with volumetric lighting and particle systems that create an authentic deep-sea atmosphere. Advanced audio design uses binaural recording techniques to create an immersive echolocation experience that guides gameplay without traditional visual cues.</p>
+                        <p>The game features stunning underwater environments with volumetric lighting that creates realistic caustic effects. Marine life behaves according to realistic AI patterns, creating a living ecosystem that responds to player actions. Each dive presents new challenges as players balance exploration curiosity with survival necessity.</p>
                     </div>
                 </div>
             </section>
@@ -773,12 +857,12 @@
                     <button class="back-btn" onclick="showSection('home')">← Back to Projects</button>
                     <h2>Neon Velocity</h2>
                     <div class="meta">
-                        <span>Platform: PC, Xbox Series X/S</span>
-                        <span>Engine: Unity 2022.3</span>
-                        <span>Development Time: 12 months</span>
+                        <span>Platform: PC, PlayStation 5, Xbox Series X</span>
+                        <span>Engine: Unreal Engine 5</span>
+                        <span>Development Time: 16 months</span>
                     </div>
                     <div class="content">
-                        <p>Neon Velocity combines high-octane racing with cyberpunk aesthetics in a futuristic cityscape. Players pilot customizable hover vehicles through dynamically generated tracks that adapt to their racing style and skill level.</p>
+                        <p>Neon Velocity combines high-octane racing with parkour mechanics in a cyberpunk dystopia. Players pilot customizable hover vehicles through vertical megacity tracks while performing death-defying wall-runs and aerial stunts.</p>
                         
                         <div class="video-section">
                             <h3>Gameplay Walkthrough</h3>
@@ -798,15 +882,16 @@
                         <div class="features">
                             <h3>Key Features</h3>
                             <ul>
-                                <li>Anti-gravity hover vehicle physics with magnetic track interaction</li>
-                                <li>Real-time track generation based on player performance metrics</li>
-                                <li>Extensive vehicle customization with performance trade-offs</li>
-                                <li>Synthwave-inspired dynamic soundtrack that responds to speed</li>
-                                <li>Competitive multiplayer with skill-based matchmaking</li>
+                                <li>Gravity-defying wall-running and ceiling racing mechanics</li>
+                                <li>Deep vehicle customization with performance and aesthetic mods</li>
+                                <li>Multi-layered vertical track design spanning entire city blocks</li>
+                                <li>Dynamic weather system affecting vehicle handling and visibility</li>
+                                <li>Competitive multiplayer with up to 16 players</li>
+                                <li>Narrative campaign exploring corporate espionage themes</li>
                             </ul>
                         </div>
                         
-                        <p>The visual design draws heavily from 1980s cyberpunk aesthetics, featuring neon-lit cityscapes with holographic advertisements and rain-slicked streets. The game's adaptive AI ensures that tracks become more challenging as players improve, creating a perfect balance between accessibility and competitive depth.</p>
+                        <p>Set in Neo-Tokyo 2087, the game features ray-traced reflections on rain-soaked streets and real-time global illumination bringing neon signs to life. The soundtrack dynamically adapts to racing intensity, blending synthwave with orchestral elements. Players can choose between pure racing or story mode, where they uncover conspiracies while competing in underground racing leagues.</p>
                     </div>
                 </div>
             </section>
