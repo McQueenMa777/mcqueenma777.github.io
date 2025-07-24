@@ -556,7 +556,9 @@
             <section id="home" class="content-section active">
                 <div class="projects-grid">
                     <div class="project-card" onclick="showProject('project1')">
-                        <div class="project-image">🎮</div>
+                        <div class="project-image" style="background-image: url('images/quantum-runner-thumbnail.jpg')">
+                            <div class="emoji">🎮</div>
+                        </div>
                         <h3 class="project-title">Quantum Runner</h3>
                         <p class="project-description">A fast-paced platformer where players manipulate quantum mechanics to solve puzzles and navigate through parallel dimensions.</p>
                         <div class="project-tags">
@@ -567,7 +569,9 @@
                     </div>
 
                     <div class="project-card" onclick="showProject('project2')">
-                        <div class="project-image">🌟</div>
+                        <div class="project-image" style="background-image: url('images/stellar-forge-thumbnail.jpg')">
+                            <div class="emoji">🌟</div>
+                        </div>
                         <h3 class="project-title">Stellar Forge</h3>
                         <p class="project-description">A space exploration and crafting game where players build and customize their own starships while discovering alien civilizations.</p>
                         <div class="project-tags">
@@ -578,7 +582,9 @@
                     </div>
 
                     <div class="project-card" onclick="showProject('project3')">
-                        <div class="project-image">🗡️</div>
+                        <div class="project-image" style="background-image: url('images/mystic-realms-thumbnail.jpg')">
+                            <div class="emoji">🗡️</div>
+                        </div>
                         <h3 class="project-title">Mystic Realms</h3>
                         <p class="project-description">An action RPG featuring dynamic spell-crafting system and procedurally generated dungeons with mythological creatures.</p>
                         <div class="project-tags">
@@ -589,7 +595,9 @@
                     </div>
 
                     <div class="project-card" onclick="showProject('project4')">
-                        <div class="project-image">🧩</div>
+                        <div class="project-image" style="background-image: url('images/mind-maze-thumbnail.jpg')">
+                            <div class="emoji">🧩</div>
+                        </div>
                         <h3 class="project-title">Mind Maze</h3>
                         <p class="project-description">A psychological puzzle game that adapts to player behavior, featuring impossible geometries and reality-bending mechanics.</p>
                         <div class="project-tags">
@@ -600,7 +608,9 @@
                     </div>
 
                     <div class="project-card" onclick="showProject('project5')">
-                        <div class="project-image">🌊</div>
+                        <div class="project-image" style="background-image: url('images/oceanic-depths-thumbnail.jpg')">
+                            <div class="emoji">🌊</div>
+                        </div>
                         <h3 class="project-title">Oceanic Depths</h3>
                         <p class="project-description">An underwater survival adventure where players explore the mysterious deep sea, managing oxygen while uncovering ancient civilizations.</p>
                         <div class="project-tags">
@@ -611,7 +621,9 @@
                     </div>
 
                     <div class="project-card" onclick="showProject('project6')">
-                        <div class="project-image">⚡</div>
+                        <div class="project-image" style="background-image: url('images/neon-velocity-thumbnail.jpg')">
+                            <div class="emoji">⚡</div>
+                        </div>
                         <h3 class="project-title">Neon Velocity</h3>
                         <p class="project-description">A high-speed cyberpunk racing game with wall-running mechanics and customizable hover vehicles in a dystopian megacity.</p>
                         <div class="project-tags">
@@ -627,9 +639,16 @@
             <section id="about" class="content-section">
                 <div class="about-content">
                     <h2>About Me</h2>
-                    <p>I'm a passionate game developer with a love for creating immersive and innovative gaming experiences. My journey in game development spans across multiple engines and platforms, always pushing the boundaries of what's possible in interactive entertainment.</p>
-                    
-                    <p>With expertise in Unity, Unreal Engine, and Godot, I specialize in creating games that challenge conventional mechanics and offer players unique experiences. From quantum physics puzzles to space exploration adventures, each project represents my commitment to combining technical excellence with creative storytelling.</p>
+                    <div class="profile-section">
+                        <div class="profile-image" style="background-image: url('images/profile-picture.jpg')">
+                            <div class="emoji">👨‍💻</div>
+                        </div>
+                        <div class="profile-text">
+                            <p>I'm a passionate game developer with a love for creating immersive and innovative gaming experiences. My journey in game development spans across multiple engines and platforms, always pushing the boundaries of what's possible in interactive entertainment.</p>
+                            
+                            <p>With expertise in Unity, Unreal Engine, and Godot, I specialize in creating games that challenge conventional mechanics and offer players unique experiences. From quantum physics puzzles to space exploration adventures, each project represents my commitment to combining technical excellence with creative storytelling.</p>
+                        </div>
+                    </div>
                     
                     <p>When I'm not coding, you can find me exploring new game mechanics, studying player psychology, or experimenting with emerging technologies like VR and procedural generation.</p>
                 </div>
@@ -952,14 +971,30 @@
 
         // Video loading function
         function loadVideo(container, videoSrc) {
-            // You can replace this with actual video loading logic
-            // For now, it just shows the video controls
-            container.classList.add('has-video');
+            console.log('Trying to load video:', videoSrc); // Debug log
             
-            // Optional: You can add actual video loading here
-            // const video = container.querySelector('.actual-video');
-            // video.src = videoSrc;
-            // video.load();
+            const video = container.querySelector('.actual-video');
+            const placeholder = container.querySelector('.video-placeholder');
+            
+            // Check if video file exists by trying to load it
+            video.onloadstart = function() {
+                console.log('Video started loading successfully');
+                container.classList.add('has-video');
+            };
+            
+            video.onerror = function() {
+                console.error('Video failed to load:', videoSrc);
+                placeholder.innerHTML = `
+                    <div class="play-icon">❌</div>
+                    <div class="video-text">Video not found: ${videoSrc}<br>
+                    <small style="font-size: 0.8rem; opacity: 0.7;">Check file name and location</small></div>
+                `;
+            };
+            
+            // Set the video source and try to load
+            const source = video.querySelector('source');
+            source.src = videoSrc;
+            video.load();
         }
     </script>
 </body>
