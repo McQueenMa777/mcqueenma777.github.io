@@ -201,7 +201,6 @@
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            transform: rotate(-0.8deg);
         }
 
         .nav-container {
@@ -222,7 +221,6 @@
             font-weight: 500;
             position: relative;
             overflow: hidden;
-            transform: rotate(0.8deg);
         }
 
         .nav-btn:hover {
@@ -279,10 +277,6 @@
             transform-style: preserve-3d;
         }
 
-        .project-card:nth-child(odd) { transform: rotate(-0.8deg); }
-        .project-card:nth-child(even) { transform: rotate(0.8deg); }
-        .project-card:nth-child(3n) { transform: rotate(-1.4deg); }
-
         .project-card::before {
             content: '';
             position: absolute;
@@ -299,7 +293,7 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px) scale(1.012) rotate(0deg);
+            transform: translateY(-8px) scale(1.012);
             border-color: rgba(121, 255, 225, 0.4);
             box-shadow: 0 24px 45px rgba(0, 0, 0, 0.35);
         }
@@ -608,6 +602,10 @@
             flex: 1;
         }
 
+        .profile-text p + p {
+            margin-top: 1rem;
+        }
+
         @media (max-width: 768px) {
             .profile-section {
                 flex-direction: column;
@@ -653,29 +651,6 @@
             nav {
                 top: 0.5rem;
                 border-radius: 20px;
-                transform: none;
-            }
-
-            .nav-btn {
-                transform: none;
-            }
-        }
-
-        @media (min-width: 1100px) {
-            .projects-grid {
-                grid-template-columns: repeat(6, minmax(0, 1fr));
-            }
-
-            .project-card {
-                grid-column: span 2;
-            }
-
-            .project-card:nth-child(1) {
-                grid-column: span 4;
-            }
-
-            .project-card:nth-child(6) {
-                grid-column: span 4;
             }
         }
     </style>
@@ -802,7 +777,7 @@
                         <div class="profile-text">
                             <p>Welcome to my page! My name is McQueen (Buting) Ma and I am a UCL BA Media graduate, specializing in game design and development Apart from that, I have been a massive game lover since I was a child. If you are interested in my projects, you can find them in the project page.</p>
                             
-                            <p>With expertise in Unity, Unreal Engine, and other design toolkits, I specialize in creating games that challenge conventional mechanics and offer players unique narrative experiences. In terms of my professional experiences, I have worked at Lilith Games, Invisible Walls, Tencent Games and Riot Games. Some of my other details are listed below!</p>
+                            <p>With expertise in Unity, Unreal Engine, and other design toolkits, I specialize in creating games that challenge conventional mechanics and offer players unique narrative experiences. In terms of my professional experiences, I have worked at Lilith Games, Invisible Walls, Secret Mode Games,Tencent Games and Riot Games. Some of my other details are listed below!</p>
                         </div>
                     </div>
                     
@@ -1133,7 +1108,7 @@
             });
 
             card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
+                card.style.transform = 'translateY(0) rotateX(0deg) rotateY(0deg) scale(1)';
             });
         });
 
@@ -1142,8 +1117,7 @@
             const header = document.querySelector('.header-content');
             const scrolled = window.pageYOffset;
             const rate = Math.max(scrolled * -0.18, -26);
-            const rotate = Math.min(scrolled * 0.01, 1.5);
-            header.style.transform = `translateY(${rate}px) rotate(${rotate}deg)`;
+            header.style.transform = `translateY(${rate}px)`;
         });
 
         // Video loading function
