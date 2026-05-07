@@ -39,6 +39,39 @@
             overflow-x: hidden;
             min-height: 100vh;
             letter-spacing: 0.01em;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.6px, transparent 0.6px);
+            background-size: 3px 3px;
+            opacity: 0.18;
+            mix-blend-mode: soft-light;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 120%;
+            height: 160%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                conic-gradient(from 120deg at 30% 30%, rgba(121, 255, 225, 0.06), rgba(95, 141, 255, 0.02), rgba(179, 123, 255, 0.08), rgba(121, 255, 225, 0.06));
+            filter: blur(40px);
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            from { transform: translate3d(-1%, -1%, 0) rotate(-1.5deg); }
+            to { transform: translate3d(2.5%, 1.5%, 0) rotate(2.5deg); }
         }
 
         .container {
@@ -165,6 +198,10 @@
             padding: 0.7rem;
             margin-bottom: 2.2rem;
             box-shadow: 0 14px 38px rgba(0, 0, 0, 0.35);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            transform: rotate(-0.8deg);
         }
 
         .nav-container {
@@ -185,6 +222,7 @@
             font-weight: 500;
             position: relative;
             overflow: hidden;
+            transform: rotate(0.8deg);
         }
 
         .nav-btn:hover {
@@ -224,6 +262,7 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 1.6rem;
             padding: 1rem 0 2rem;
+            perspective: 1200px;
         }
 
         .project-card {
@@ -237,7 +276,12 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            transform-style: preserve-3d;
         }
+
+        .project-card:nth-child(odd) { transform: rotate(-0.8deg); }
+        .project-card:nth-child(even) { transform: rotate(0.8deg); }
+        .project-card:nth-child(3n) { transform: rotate(-1.4deg); }
 
         .project-card::before {
             content: '';
@@ -255,7 +299,7 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px) scale(1.012);
+            transform: translateY(-8px) scale(1.012) rotate(0deg);
             border-color: rgba(121, 255, 225, 0.4);
             box-shadow: 0 24px 45px rgba(0, 0, 0, 0.35);
         }
@@ -276,6 +320,7 @@
             background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
+            transform: translateZ(24px);
         }
 
         .project-image::before {
@@ -294,12 +339,14 @@
             font-size: 1.45rem;
             margin-bottom: 0.72rem;
             color: var(--accent);
+            transform: translateZ(14px);
         }
 
         .project-description {
             color: var(--muted);
             line-height: 1.65;
             margin-bottom: 1.5rem;
+            transform: translateZ(8px);
         }
 
         .project-tags {
@@ -316,6 +363,7 @@
             font-size: 0.78rem;
             border: 1px solid rgba(121, 255, 225, 0.28);
             letter-spacing: 0.02em;
+            backdrop-filter: blur(6px);
         }
 
         /* Project detail page */
@@ -328,6 +376,21 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
             box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-detail::before,
+        .about-content::before {
+            content: '';
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(121, 255, 225, 0.18), transparent 70%);
+            top: -120px;
+            right: -70px;
+            pointer-events: none;
         }
 
         .project-detail h2 {
@@ -377,6 +440,7 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(10px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
         }
 
         .video-placeholder {
@@ -471,6 +535,7 @@
             font-weight: 600;
             margin-bottom: 2rem;
             transition: all 0.3s ease;
+            letter-spacing: 0.02em;
         }
 
         .back-btn:hover {
@@ -490,6 +555,8 @@
             line-height: 1.8;
             font-size: 1.1rem;
             box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
         }
 
         .about-content h2 {
@@ -523,6 +590,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+            transform: rotate(-2deg);
         }
 
         .profile-image::before {
@@ -574,6 +642,7 @@
             
             .project-card {
                 padding: 1.5rem;
+                transform: none !important;
             }
 
             .project-detail,
@@ -584,6 +653,29 @@
             nav {
                 top: 0.5rem;
                 border-radius: 20px;
+                transform: none;
+            }
+
+            .nav-btn {
+                transform: none;
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .projects-grid {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+            }
+
+            .project-card {
+                grid-column: span 2;
+            }
+
+            .project-card:nth-child(1) {
+                grid-column: span 4;
+            }
+
+            .project-card:nth-child(6) {
+                grid-column: span 4;
             }
         }
     </style>
@@ -1025,12 +1117,33 @@
             });
         });
 
+        // Add dramatic 3D tilt effect for project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 769) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const cx = rect.width / 2;
+                const cy = rect.height / 2;
+                const rotateX = ((cy - y) / cy) * 5.5;
+                const rotateY = ((x - cx) / cx) * 5.5;
+                card.style.transform = `translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
         // Add scroll effect to header
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header-content');
             const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            header.style.transform = `translateY(${rate}px)`;
+            const rate = Math.max(scrolled * -0.18, -26);
+            const rotate = Math.min(scrolled * 0.01, 1.5);
+            header.style.transform = `translateY(${rate}px) rotate(${rotate}deg)`;
         });
 
         // Video loading function
